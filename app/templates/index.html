@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}hackcity{% endblock %}
+{% block content %}
+
+
+<div class="card container d-flex h-100" style="width: 48rem; margin-top:5%;">
+  <img class="card-img-top" src="../static/img/city.jpg#" alt="Card image cap">
+  <div class="card-body">
+    <h2 class="card-title"></h2>
+    <i class="card-text">*Only for research proposes</i>
+  </div>
+  <div class="card-body">
+   <form action="/setup" method="post" id="installation">
+
+   <div class="form-group">
+  <label for="sel1">Select city:</label>
+<select name="country" class="countries form-control" id="countryId">
+    <option value="">Select Country</option>
+</select>
+<select name="state" class="states form-control" id="stateId">
+    <option value="">Select State</option>
+</select>
+<select name="city" class="cities form-control" id="cityId">
+    <option value="">Select City</option>
+</select>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+<script src="//geodata.solutions/includes/countrystatecity.js"></script>
+</div>
+
+
+   <h4>-Docker options-</h4>
+
+
+
+   <h4>-Zabbix options-</h4>
+    <div class="form-check">
+     <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="zabbix_radio">I want to specify route scripts
+     </label>
+    </div>
+
+    <h4>-Openvas options-</h4>
+    <div class="form-check">
+     <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="openvas_radio"> I've got an openvas server
+     </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="openvas_radio">I've got two or more openvas servers
+      </label>
+    </div>
+   <div class="form-check">
+  <label class="form-check-label">
+    <input type="radio" class="form-check-input" name="openvas_radio">Create an openvas container
+  </label>
+</div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
+   
+
+  </div>
+</div>
+
+{% endblock %}
+{% block footer %}
+{% endblock %}
