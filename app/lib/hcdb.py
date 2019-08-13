@@ -1,8 +1,11 @@
 import sqlite3
 import subprocess
+import os
 
 def create_hackthecity_db(db):
-	db2 = [(db,)]
+	db = db.replace(" ", "_")
+	os.system("mkdir volumes/"+db)
+	db2 = [("volumes/"+db,)]
 	db = subprocess.getoutput("pwd")+"/db/"+db+".db"
 	conn = sqlite3.connect(db)
 	c = conn.cursor()
@@ -11,12 +14,12 @@ def create_hackthecity_db(db):
 	c.execute('''CREATE TABLE docker
 	     	(volume text)''')
 	c.executemany("INSERT INTO docker VALUES (?);", (db2))
-
 	conn.commit()
 	conn.close()
 
 
 def check_volume_path(db):
+	db = db.replace(" ", "_")
 	db = subprocess.getoutput("pwd")+"/db/"+db+".db"
 	conn = sqlite3.connect(db)
 	c = conn.cursor()
