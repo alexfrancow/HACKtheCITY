@@ -17,7 +17,7 @@ services:
         hard: 65536
     mem_limit: 8g
     volumes:
-      - elasticsearch:/usr/share/elasticsearch/data
+      - /home/afranco/hackcity/volumes/A_Coruna:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     #restart: always
@@ -81,27 +81,26 @@ services:
   openvas:
     image: mikesplain/openvas
     container_name: openvas
+    environment:
+      - PUBLIC_HOSTNAME=192.168.1.51
     ports:
       - 443:443
     volumes:
-      - openvas:/var/lib/openvas/mgr/
+      - /home/afranco/hackcity/volumes/A_Coruna:/var/lib/openvas/mgr/
   zabbix-appliance:
-    image: zabbix/zabbix-appliance
-    container_name: zabbix-appliance-3
+    image: zabbix/zabbix-appliance:centos-latest
+    container_name: zabbix-appliance-4
+    environment:
+      - ZBX_STARTDISCOVERERS=1
     ports:
       - 8080:80
       - 10051:10051
     volumes:
-      - zabbix:/var/lib/mysql
+      - /home/afranco/hackcity/volumes/A_Coruna:/var/lib/mysql
 
 volumes:
-  elasticsearch:
-  openvas:
-  zabbix:
   esdata1:
     driver: local
 
 networks:
   esnet:
-
-
