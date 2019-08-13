@@ -57,8 +57,14 @@
 </div>
 
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" id="setup" class="btn btn-primary">Submit</button>
    </form>
+
+  <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+		<p id="changeText" style="margin-left:1%;"></p>
+            </div>
+
    
 
   </div>
@@ -66,4 +72,34 @@
 
 {% endblock %}
 {% block footer %}
+    <script>
+        $(document).ready(function() {
+            $('.progress').hide();
+	    $('#advancedOptions').hide();
+        });
+  </script>
+ 
+
+   <script>
+        $(document).ready(function(){
+            $("#setup").click(function(){
+                $(".progress").toggle();
+		$("form").toggle();
+                $(".progress-bar").animate({
+                    width: "65%"
+                }, 5000);
+		var wordsArray = ["Creating structure...", "Starting containers...", "Importing templates into ZABBIX...", "Getting city devices...", "Launching ZABBIX discoveries..."];
+		var time = 0;
+		$.each(wordsArray, function(index, value) {
+	      		function delayed() {
+    				$("#changeText").html(value);
+      			};
+      			setTimeout( delayed , time );
+      			time += 4000;
+		});
+
+		});
+  	});
+    </script>
+
 {% endblock %}
