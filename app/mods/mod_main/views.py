@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask import Flask, jsonify, Blueprint, render_template, request, flash, redirect, url_for, flash, Response
-from app.lib.hcdb import create_hackthecity_db, check_volume_path
+from app.lib.hcdb import create_hackthecity_db, check_volume_path, select_databases
 import time
 import json
 import os
@@ -10,11 +10,20 @@ app = Flask(__name__)
 
 @main_blueprint.route('/', methods= ['GET', 'POST'])
 def main():
+
+    # Comprueba si hay alguna BD
     db_exists = len(os.listdir("db"))
     if db_exists == 0:
         return render_template('index.html')
+
     else:
-        return Response(db_exists, mimetype='text/html')
+        return redirect('/choose_db')
+
+
+@main_blueprint.route('/choose_db', methods= ['GET', 'POST'])
+def choose_db():
+    dbs = select_databases()
+    return render_template('choose_db.html', dbs=dbs)
 
 
 @main_blueprint.route('/setup', methods=['POST'])
@@ -35,7 +44,6 @@ def setup():
             print(1)
 
     return Response("hola", mimetype='text/html')
-    #return Response(message(), mimetype='text/event-stream')
 
 if __name__ == '__main__':
     app.run(debug= True)

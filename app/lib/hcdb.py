@@ -27,3 +27,7 @@ def check_volume_path(db):
 	path = c.fetchone()
 	return path
 
+
+def select_databases():
+	dbs = os.listdir("db")
+	return dbs
