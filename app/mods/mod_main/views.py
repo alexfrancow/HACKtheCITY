@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from flask import Flask, jsonify, Blueprint, render_template, request, flash, redirect, url_for, flash, Response
 from app.lib.hcdb import create_hackthecity_db, check_volume_path, select_databases
+from app.lib.maxmind import hosts_up
 import time
 import json
 import os
@@ -45,6 +46,10 @@ def use_db():
     os.system("rm docker-compose.ymll")
     os.system("sysctl -w vm.max_map_count=262144")
     os.system("chmod -R 777 volumes")
+    print(db)
+    ips = hosts_up(db)
+    print(ips)
+
     os.system("docker-compose up")
     time.sleep(30)
 

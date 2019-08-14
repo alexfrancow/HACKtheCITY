@@ -17,7 +17,7 @@ services:
         hard: 65536
     mem_limit: 8g
     volumes:
-      - /home/afranco/hackcity/volumes/A_Coruna:/usr/share/elasticsearch/data
+      - /root/github/HACKtheCITY/volumes/A_Coruna:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
     #restart: always
@@ -83,10 +83,11 @@ services:
     container_name: openvas
     environment:
       - PUBLIC_HOSTNAME=192.168.1.51
+      - OV_PASSWORD=abc1234.
     ports:
       - 443:443
     volumes:
-      - /home/afranco/hackcity/volumes/A_Coruna:/var/lib/openvas/mgr/
+      - /root/github/HACKtheCITY/volumes/A_Coruna:/var/lib/openvas/mgr/
   zabbix-appliance:
     image: zabbix/zabbix-appliance:centos-latest
     container_name: zabbix-appliance-4
@@ -96,7 +97,7 @@ services:
       - 8080:80
       - 10051:10051
     volumes:
-      - /home/afranco/hackcity/volumes/A_Coruna:/var/lib/mysql
+      - /root/github/HACKtheCITY/volumes/A_Coruna:/var/lib/mysql
 
 volumes:
   esdata1:
